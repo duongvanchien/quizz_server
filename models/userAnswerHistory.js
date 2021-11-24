@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userQuestionHistorySchema = new Schema({
+const userAnswerHistorySchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "user",
@@ -14,11 +14,10 @@ const userQuestionHistorySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "question",
   },
-  score: {
-    type: Number,
-    require: true,
-    default: 0,
+  answer: {
+    type: Schema.Types.ObjectId,
+    ref: "answer",
   },
 });
 
-module.exports = mongoose.model("userQuestionHistory", userQuestionHistorySchema);
+module.exports = mongoose.model("userAnswerHistory", userAnswerHistorySchema);

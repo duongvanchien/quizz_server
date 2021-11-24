@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
   if (!username || !password)
     return res
       .status(400)
-      .json({ success: false, message: "username and password are required" });
+      .json({ success: false, message: "Username and password are required" });
 
   try {
     const user = await User.findOne({ username });
