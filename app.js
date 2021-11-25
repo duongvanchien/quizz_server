@@ -10,6 +10,7 @@ const authRouter = require("./routes/auth");
 const topicRouter = require("./routes/topic");
 const questionRouter = require("./routes/question");
 const answerRouter = require("./routes/answer");
+const roomRouter = require("./routes/room");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/auth", authRouter);
 app.use("/topic", topicRouter);
 app.use("/question", questionRouter);
 app.use("/answer", answerRouter);
+app.use("/room", roomRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

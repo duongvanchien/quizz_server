@@ -6,6 +6,10 @@ const topicSchema = new Schema({
     type: String,
     required: true,
   },
+  url: {
+    type: String,
+    require: false,
+  },
 });
 
 module.exports = mongoose.model("topic", topicSchema);
