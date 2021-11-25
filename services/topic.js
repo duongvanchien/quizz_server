@@ -3,7 +3,7 @@ const Topic = require("../models/topic");
 const createTopic = async (req, res) => {
   const { name } = req.body;
   if (!name) {
-    return json
+    return res
       .status(400)
       .json({ success: false, message: "Name is required" });
   }

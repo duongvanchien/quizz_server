@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     type: String,
     require: true,
     enum: ["ADMIN", "PLAYER"],
+    default: "PLAYER",
   },
   createdAt: {
     type: Date,

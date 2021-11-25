@@ -3,13 +3,13 @@ const Question = require("../models/question");
 const createQuestion = async (req, res) => {
   const { topic, text, url } = req.body;
   if (!topic) {
-    return json
+    return res
       .status(400)
       .json({ success: false, message: "Topic is required" });
   }
 
   if (!text) {
-    return json
+    return res
       .status(400)
       .json({ success: false, message: "Text is required" });
   }

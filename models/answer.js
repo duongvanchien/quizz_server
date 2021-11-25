@@ -15,8 +15,9 @@ const answerSchema = new Schema({
     required: false,
   },
   is_correct: {
-    type: Boolean,
+    type: Number,
     required: true,
+    default: 0,
   },
 });
 

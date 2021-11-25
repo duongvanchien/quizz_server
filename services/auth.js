@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
   if (!username || !password)
     return res
       .status(400)
@@ -20,6 +20,7 @@ const register = async (req, res) => {
     const newUser = new User({
       username,
       password: hashPassword,
+      role,
     });
     await newUser.save();
 
