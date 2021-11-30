@@ -2,7 +2,7 @@ const Question = require("../models/question");
 const _ = require("lodash");
 
 const loadQuestions = async (req, res) => {
-  const { limit } = req.body;
+  const { limit } = req.query;
   try {
     const questions = await Question.find()
       .populate("answers")
@@ -12,7 +12,7 @@ const loadQuestions = async (req, res) => {
       .json({
         success: true,
         message: "success",
-        questions: _.sampleSize(questions, limit),
+        questions: _.sampleSize(questions, limit ),
       });
   } catch (error) {
     console.log(error);
