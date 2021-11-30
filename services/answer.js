@@ -30,16 +30,9 @@ const loadAnswerByQuestion = async (req, res) => {
 };
 
 const createAnswer = async (req, res) => {
-  const { question, text, url, is_correct } = req.body;
-  if (!question) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Question is required" });
-  }
-
+  const { text, url, is_correct } = req.body;
   try {
     const newAnswer = new Answer({
-      question,
       text,
       url,
       is_correct,

@@ -14,6 +14,12 @@ const questionSchema = new Schema({
     type: String,
     required: false,
   },
+  answers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "answer",
+    },
+  ],
 });
 
 module.exports = mongoose.model("question", questionSchema);
