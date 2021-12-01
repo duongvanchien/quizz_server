@@ -5,15 +5,13 @@ const loadQuestions = async (req, res) => {
   const { limit } = req.query;
   try {
     const questions = await Question.find()
-      .populate("answers")
+      .populate("answers", ["_id", "text"])
       .populate("topic");
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "success",
-        questions: _.sampleSize(questions, limit ),
-      });
+    return res.status(200).json({
+      success: true,
+      message: "success",
+      questions: _.sampleSize(questions, limit),
+    });
   } catch (error) {
     console.log(error);
     return res

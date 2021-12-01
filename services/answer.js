@@ -42,7 +42,25 @@ const createAnswer = async (req, res) => {
       .status(200)
       .json({ success: true, message: "success", newAnswer });
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
+
+const getAnswers = async (req, res) => {
+  const { answers } = req.body;
+  try {
+    const listAnswer = await Promise.all(
+      answers.map(async (value) => {
+        const answer = await Answer.findOne({ _id: value });
+        return answer;
+      })
+    );
+    return res
+      .status(200)
+      .json({ success: true, message: "success", listAnswer });
+  } catch (error) {
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
@@ -52,4 +70,5 @@ const createAnswer = async (req, res) => {
 module.exports = {
   loadAnswerByQuestion,
   createAnswer,
+  getAnswers,
 };
