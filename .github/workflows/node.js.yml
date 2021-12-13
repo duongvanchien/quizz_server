@@ -28,6 +28,4 @@ jobs:
         remote_path: /var/www/
 
         script:
-          cd quizzserver.ddns.net
-          git pull origin master
           pm2 restart 0
