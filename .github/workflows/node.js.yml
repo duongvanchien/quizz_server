@@ -23,9 +23,6 @@ jobs:
           username: root
           key: ${{secrets.SERVER_SSH}}
 
-          local_path: ./*
-          remote_path: /var/www/
-
           script: |
-            cd quizz_server
+            cd /var/www/quizz_server
             git pull
