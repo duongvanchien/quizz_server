@@ -19,7 +19,7 @@ jobs:
         with:
           host: ${{secrets.SERVER}}
           username: ${{secrets.SERVER_USERNAME}}
-          key: ${{secrets.SERVER_SSH}}
+          password: ${{secrets.SERVER_PASSWORD}}
 
           script: |
             cd /var/www/quizz_server/quizz_server
