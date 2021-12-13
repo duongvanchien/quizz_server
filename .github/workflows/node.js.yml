@@ -20,9 +20,10 @@ jobs:
           # ssh host
           host: ${{secrets.SERVER}}
           # ssh username
-          username: root
+          username: duongvanchien
           key: ${{secrets.SERVER_SSH}}
 
           script: |
             cd /var/www/quizz_server/quizz_server
             git pull
+            pm2 restart 0
