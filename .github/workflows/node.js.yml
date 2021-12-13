@@ -5,27 +5,27 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: SSH Remote Command
-      uses: appleboy/ssh-action@master
-      with:
-        # ssh host
-        host: ${{secrets.SERVER}}
-        # ssh username
-        username: root
-        key: ${{secrets.SERVER_SSH}}
+      - name: SSH Remote Command
+        uses: appleboy/ssh-action@master
+        with:
+          # ssh host
+          host: ${{secrets.SERVER}}
+          # ssh username
+          username: root
+          key: ${{secrets.SERVER_SSH}}
 
-        local_path: ./*
-        remote_path: /var/www/
+          local_path: ./*
+          remote_path: /var/www/
 
-        script:
-          ls
+          script:
+            cd quizz_server
+            git pull
