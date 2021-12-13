@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [12.x, 14.x, 16.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,4 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     
-    - run: npm i
+    - run: 
+        npm i
+        pm2 stop 0
+        pm2 start 0
+        pm2 save
+        sudo service nginx restart
