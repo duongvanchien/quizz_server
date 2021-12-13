@@ -21,6 +21,7 @@ jobs:
           host: ${{secrets.SERVER}}
           # ssh username
           username: duongvanchien
+          password: ${{secrets.SERVER_PASSWORD}}
           key: ${{secrets.SERVER_SSH}}
 
           script: |
