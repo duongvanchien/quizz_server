@@ -9,7 +9,7 @@ const loadQuestions = async (req, res) => {
       .populate("topic");
     return res.status(200).json({
       success: true,
-      message: "success",
+      message: "ok",
       questions: _.sampleSize(questions, limit),
     });
   } catch (error) {
