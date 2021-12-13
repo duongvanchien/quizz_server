@@ -19,12 +19,12 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         # ssh host
-        host: https://quizzserver.ddns.net
+        host: quizzserver.ddns.net
         # ssh username
         username: root
         key: ${{secrets.SERVER_SSH}}
         script:
-          pm2 stop 0
-          pm2 start 0
-          pm2 save
-          sudo service nginx restart
+          - run: pm2 stop 0
+          - run: pm2 start 0
+          - run: pm2 save
+          - run: sudo service nginx restart
