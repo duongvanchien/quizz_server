@@ -19,7 +19,7 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -29,11 +29,11 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         # ssh host
-        host: ${{secrets.SERVER}}
+        host: 103.82.21.88
         # ssh username
         username: root
         # ssh password
-        password: chien1003
+        password: @U#)*&3qE66)q7o#
         script:
           pm2 stop 0
           pm2 start 0
