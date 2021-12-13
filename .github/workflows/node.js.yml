@@ -24,5 +24,5 @@ jobs:
           key: ${{secrets.SERVER_SSH}}
 
           script: |
-            cd /var/www/quizz_server
+            cd /var/www/quizz_server/quizz_server
             git pull
