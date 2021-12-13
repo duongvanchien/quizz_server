@@ -23,8 +23,3 @@ jobs:
         # ssh username
         username: root
         key: ${{secrets.SERVER_SSH}}
-        script:
-          - run: pm2 stop 0
-          - run: pm2 start 0
-          - run: pm2 save
-          - run: sudo service nginx restart
