@@ -17,11 +17,10 @@ jobs:
       - name: SSH Remote Command
         uses: appleboy/ssh-action@master
         with:
-          # ssh host
           host: ${{secrets.SERVER}}
-          # ssh username
-          username: duongvanchien
+          username: ${{secrets.SERVER_USERNAME}}
           password: ${{secrets.SERVER_PASSWORD}}
+          key: ${{secrets.SERVER_SSH}}
 
           script: |
             cd /var/www/quizz_server/quizz_server
