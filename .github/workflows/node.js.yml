@@ -19,7 +19,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         # ssh host
-        host: quizzserver.ddns.net
+        host: ${{secrets.SERVER}}
         # ssh username
         username: root
         key: ${{secrets.SERVER_SSH}}
@@ -28,4 +28,4 @@ jobs:
         remote_path: /var/www/
 
         script:
-          pm2 restart 0
+          ls
