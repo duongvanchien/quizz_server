@@ -59,7 +59,11 @@
 
 name: Node.js CI
 
-on: [push] # tells github to run this on any push to the repository
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   test: # names the job
