@@ -99,4 +99,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /var/www/quizz_server/quizz_server
-            ls
+            npm i
