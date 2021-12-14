@@ -1,26 +1,32 @@
-# name: Node.js CI
+name: Node.js CI
 
-# on:
-#   push:
-#     branches: [master]
-#   pull_request:
-#     branches: [master]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: SSH Remote Command
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{secrets.SERVER}}
-#           username: ${{secrets.SERVER_USERNAME}}
-#           password: ${{secrets.SERVER_PASSWORD}}
+    strategy:
+      fail-fast: false # tells github to not run further steps if this one fails
+      matrix:
+        node-version: [12.x] # sets the version of node we want to use, should be what you have on your server
 
-#           script: |
-#             cd /var/www/quizz_server/quizz_server
-#             npm i
+    steps:
+      - name: SSH Remote Command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH }}
+
+          script: |
+            cd /var/www/quizz_server/quizz_server
+            ls
+            pm2 status
 
 
 # name: Node.js CI
@@ -57,49 +63,49 @@
 #     - run: sudo service nginx restart
 
 
-name: Node.js CI
+# name: Node.js CI
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#     branches: [master]
 
-jobs:
-  test: # names the job
-    runs-on: ubuntu-latest # sets the version of linux we want to use, should be what you have on your server
+# jobs:
+#   test: # names the job
+#     runs-on: ubuntu-latest # sets the version of linux we want to use, should be what you have on your server
 
-    strategy:
-      fail-fast: false # tells github to not run further steps if this one fails
-      matrix:
-        node-version: [12.x] # sets the version of node we want to use, should be what you have on your server
+#     strategy:
+#       fail-fast: false # tells github to not run further steps if this one fails
+#       matrix:
+#         node-version: [12.x] # sets the version of node we want to use, should be what you have on your server
 
-    steps:
-      - uses: actions/checkout@v2 # fetches your commit to test it
-      - name: Use Node.js ${{ matrix.node-version }} # names our step
-        uses: actions/setup-node@v1 # downloads node and npm
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install # installs your dependencies
-      - run: npm run test # builds your app
-      - run: npm test # runs your test suite
-        env:
-          CI: true # shows terminal output!
+#     steps:
+#       - uses: actions/checkout@v2 # fetches your commit to test it
+#       - name: Use Node.js ${{ matrix.node-version }} # names our step
+#         uses: actions/setup-node@v1 # downloads node and npm
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - run: npm install # installs your dependencies
+#       - run: npm run test # builds your app
+#       - run: npm test # runs your test suite
+#         env:
+#           CI: true # shows terminal output!
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test # this job depends on "test" having finished
-    if: github.ref == 'refs/heads/master' # we tell Github to only execute this step if we're on our master branch (so we don't put unfinished branches in production)
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: test # this job depends on "test" having finished
+#     if: github.ref == 'refs/heads/master' # we tell Github to only execute this step if we're on our master branch (so we don't put unfinished branches in production)
 
-    steps:
-      - name: Deploying to ubuntu server
-        uses: appleboy/ssh-action@master # An action made to control Linux servers
-        with: # We set all our secrets here for the action, these won't be shown in the action logs
-          host: ${{ secrets.SERVER }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH }}
-          # password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
-            cd /var/www/quizz_server/quizz_server
-            ls
-            pm2 status
+#     steps:
+#       - name: Deploying to ubuntu server
+#         uses: appleboy/ssh-action@master # An action made to control Linux servers
+#         with: # We set all our secrets here for the action, these won't be shown in the action logs
+#           host: ${{ secrets.SERVER }}
+#           username: ${{ secrets.SERVER_USERNAME }}
+#           key: ${{ secrets.SERVER_SSH }}
+#           # password: ${{ secrets.SERVER_PASSWORD }}
+#           script: |
+#             cd /var/www/quizz_server/quizz_server
+#             ls
+#             pm2 status
