@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false # tells github to not run further steps if this one fails
       matrix:
-        node-version: [12.x] # sets the version of node we want to use, should be what you have on your server
+        node-version: [12.x, 14.x] # sets the version of node we want to use, should be what you have on your server
 
     steps:
       - uses: actions/checkout@v2
@@ -21,9 +21,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+      # - run: npm ci
+      # - run: npm run build --if-present
+      # - run: npm test
 
       - name: SSH Remote Command
         uses: appleboy/ssh-action@master
