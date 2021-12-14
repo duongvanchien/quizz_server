@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
@@ -34,6 +33,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH }}
 
           script: |
+            pm2 delete all
             cd /var/www/quizz_server/quizz_server
             ls
             node -v
