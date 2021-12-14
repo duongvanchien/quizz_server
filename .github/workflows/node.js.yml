@@ -26,6 +26,8 @@ jobs:
           script: |
             cd /var/www/quizz_server/quizz_server
             ls
+            node -v
+            npm i
             pm2 status
 
 
