@@ -33,6 +33,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH }}
 
           script: |
+            npm install pm2 -g
             pm2 delete all
             cd /var/www/quizz_server/quizz_server
             ls
