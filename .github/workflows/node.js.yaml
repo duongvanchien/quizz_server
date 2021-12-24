@@ -33,6 +33,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH }}
 
           script: |
+            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+            sudo apt install nodejs
             npm install pm2 -g
             pm2 delete all
             cd /var/www/quizz_server/quizz_server
