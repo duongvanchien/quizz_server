@@ -1,44 +1,44 @@
-# name: Node.js CI
+name: Node.js CI
 
-# on:
-#   push:
-#     branches: [master]
-#   pull_request:
-#     branches: [master]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     strategy:
-#       fail-fast: false # tells github to not run further steps if this one fails
-#       matrix:
-#         node-version: [12.x, 14.x, 17.x] # sets the version of node we want to use, should be what you have on your server
+    strategy:
+      fail-fast: false # tells github to not run further steps if this one fails
+      matrix:
+        node-version: [12.x, 14.x, 17.x] # sets the version of node we want to use, should be what you have on your server
 
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#       # - run: npm ci
-#       # - run: npm run build --if-present
-#       # - run: npm test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      # - run: npm ci
+      # - run: npm run build --if-present
+      # - run: npm test
 
-#       - name: SSH Remote Command
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.SERVER }}
-#           username: ${{ secrets.SERVER_USERNAME }}
-#           key: ${{ secrets.SERVER_SSH }}
+      - name: SSH Remote Command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH }}
 
-#           script: |
-#             pm2 delete all
-#             cd /var/www/quizz_server/quizz_server
-#             ls
-#             node -v
-#             npm i
-#             pm2 status
+          script: |
+            pm2 delete all
+            cd /var/www/quizz_server/quizz_server
+            ls
+            node -v
+            npm i
+            pm2 status
 
 # name: Node.js CI
 
@@ -119,15 +119,3 @@
 #             cd /var/www/quizz_server/quizz_server
 #             ls
 #             pm2 status
-
-name: setup-CI
-on:
-  push:
-    branches: [master]
-
-jobs:
-  docker:
-    runs-on: ubuntu-lastest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
